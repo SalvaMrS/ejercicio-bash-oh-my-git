@@ -29,11 +29,15 @@ for archivo in $archivos; do
         echo "Procesando archivo: $archivo"
     fi
 
-    echo "" >> chequeos 
-    echo "##### Chequeo del archivo: $archivo #####" >> chequeos
-
-    # Extraer la sección [win] y agregarla al archivo chequeos
-    extraer_seccion "$archivo" "win" >> chequeos
+    # Verificar si el archivo contiene la sección [win]
+    if grep -q '^\[win' "$archivo"; then
+        # Agregar el nombre del archivo como un comentario
+        echo "##### Chequeo del archivo: $archivo #####" >> chequeos
+        # Extraer la sección [win] y agregarla al archivo chequeos
+        extraer_seccion "$archivo" "win" >> chequeos
+        # Agregar una línea en blanco para separar los chequeos
+        echo "" >> chequeos
+    fi
 done
 
 echo "Proceso completado. Los chequeos se han guardado en el archivo 'chequeos'."
