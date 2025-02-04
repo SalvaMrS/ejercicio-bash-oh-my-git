@@ -40,4 +40,3 @@ for archivo in $archivos; do
     fi
 done
 
-echo "Proceso completado. Los chequeos se han guardado en el archivo 'chequeos'."
